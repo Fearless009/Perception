@@ -1,0 +1,9 @@
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vs/
+Build/
+Content/
+*.umap
+*.uasset
