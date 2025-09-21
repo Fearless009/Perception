@@ -13,6 +13,7 @@
 #include "../Actors/Portal.h"
 #include "NiagaraSystem.h"
 #include "NiagaraFunctionLibrary.h"
+#include "NiagaraComponent.h"
 #include "Materials/MaterialParameterCollection.h"
 #include "Materials/MaterialParameterCollectionInstance.h"
 #include "Curves/CurveFloat.h"
@@ -23,9 +24,6 @@
 #include "WorldPartition/DataLayer/DataLayerAsset.h"
 #include "WorldPartition/DataLayer/DataLayerManager.h"
 #include "Blueprint/UserWidget.h"
-#include "NiagaraComponent.h"
-#include "NiagaraSystem.h"
-#include "NiagaraFunctionLibrary.h"
 #include "../Actors/DynamicWeatherSystem.h"
 
 
@@ -234,8 +232,8 @@ void AMainCharacter::Look(const FInputActionValue& Value)
 
 	if (GetController())
 	{
-		AddControllerYawInput(MouseXDirection);
-		AddControllerPitchInput(MouseYDirection);
+		AddControllerYawInput(MouseXDirection * MouseSensitivityMultiplier);
+		AddControllerPitchInput(MouseYDirection * MouseSensitivityMultiplier);
 	}
 }
 
@@ -630,9 +628,9 @@ void AMainCharacter::OnPortalJump_Implementation(const FVector& TargetLocation, 
 
 		if (GrabbedObject)
 		{
+			IPortalJumper::Execute_SetIgnoreDuplicateDrop(GrabbedObject->GetOwner(), true);
 			IPortalJumper::Execute_PlayerJumpedPortalWithGrabbedObject(GrabbedObject->GetOwner());
 			IPortalJumper::Execute_DeactivateDuplicateObject(GrabbedObject->GetOwner());
-			IPortalJumper::Execute_SetIgnoreDuplicateDrop(GrabbedObject->GetOwner(), true);
 			IPortalJumper::Execute_SetPickupObjectMeshVisibility(GrabbedObject->GetOwner(), true, false);
 			IPortalJumper::Execute_SetIgnoreInternalPortalCollider(GrabbedObject->GetOwner(), false);
 		}

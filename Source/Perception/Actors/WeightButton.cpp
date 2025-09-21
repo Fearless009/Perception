@@ -3,6 +3,7 @@
 #include "Curves/CurveFloat.h"
 #include "../Interfaces/PickupObjectInterface.h"
 #include "../Actors/Door.h"
+#include "../Interfaces/PortalJumper.h"
 
 AWeightButton::AWeightButton()
 {
@@ -51,7 +52,8 @@ void AWeightButton::Tick(float DeltaTime)
 
 void AWeightButton::Collider_OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (OtherActor->GetClass()->ImplementsInterface(UPickupObjectInterface::StaticClass()))
+	if (OtherActor->GetClass()->ImplementsInterface(UPickupObjectInterface::StaticClass()) ||
+		OtherActor->GetClass()->ImplementsInterface(UPortalJumper::StaticClass()))
 	{
 		if (ButtonCurve)
 		{
@@ -64,7 +66,8 @@ void AWeightButton::Collider_OnComponentBeginOverlap(UPrimitiveComponent* Overla
 
 void AWeightButton::Collider_OnComponentEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	if (OtherActor->GetClass()->ImplementsInterface(UPickupObjectInterface::StaticClass()))
+	if (OtherActor->GetClass()->ImplementsInterface(UPickupObjectInterface::StaticClass()) ||
+		OtherActor->GetClass()->ImplementsInterface(UPortalJumper::StaticClass()))
 	{
 		if (ButtonCurve)
 		{

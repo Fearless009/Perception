@@ -158,7 +158,7 @@ void APickupObjectBase::PlayerJumpedPortalWithGrabbedObject_Implementation()
 			Mesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_GameTraceChannel2, ECollisionResponse::ECR_Overlap);
 			Mesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
 		};
-	const float Delay = 0.2f;
+	const float Delay = 0.5f;
 	GetWorld()->GetTimerManager().SetTimer(TempHandle, EnableCollision, Delay, false);
 }
 
@@ -166,3 +166,4 @@ void APickupObjectBase::SetIsGrabbed_Implementation(bool InIsGrabbed)
 {
 	bIsGrabbed = InIsGrabbed;
 }
+

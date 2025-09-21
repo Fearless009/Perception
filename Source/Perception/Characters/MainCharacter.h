@@ -210,6 +210,9 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Color", meta = (AllowPrivateAccess = "true"))
 	FLinearColor LinearBlueColor = FLinearColor(1.176f, 3.371f, 5.0f, 1.0f);
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mouse Sensitivity", meta = (AllowPrivateAccess = "true"))
+	float MouseSensitivityMultiplier = 0.8f;
+
 	UPROPERTY()
 	APortal* PortalActor;
 
